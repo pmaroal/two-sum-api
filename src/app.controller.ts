@@ -33,6 +33,6 @@ export class AppController {
       }
     }
     //Si no se encuentran numeros, devolver un 404
-    throw new HttpException('No two numbers found', HttpStatus.NOT_FOUND);
+    throw new HttpException('Two numbers not found', HttpStatus.NOT_FOUND);
   }
 }
