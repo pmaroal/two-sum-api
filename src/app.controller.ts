@@ -8,8 +8,7 @@ import {
 
 @Controller()
 export class AppController {
-  // Endpoint /health que siempre responde OK con status 200
-
+  // Endpoint /health always responding OK with status 200
   @Get('health')
   getHealth(): string {
     return 'ok';
@@ -19,12 +18,12 @@ export class AppController {
 
   @Get('twoSum')
   getTwoSum(@Query('array') array: string, @Query('target') target: string) {
-    //Parsear el array y el target de string a los tipos necesarios
+    // Endpoint /twoSum receiving an array and a target as parameters
 
     const numbersArray = JSON.parse(array);
     const targetNumber = parseInt(target);
 
-    //Lógica para encontrar dos numeros aue sumen el valor objetivo
+    //Logic for finding two numbers that add up to the target value
     for (let i = 0; i < numbersArray.length; i++) {
       for (let j = i + 1; j < numbersArray.length; j++) {
         if (numbersArray[i] + numbersArray[j] === targetNumber) {
@@ -32,7 +31,7 @@ export class AppController {
         }
       }
     }
-    //Si no se encuentran numeros, devolver un 404
+    //If no numbers are found, return 404
     throw new HttpException('Two numbers not found', HttpStatus.NOT_FOUND);
   }
 }
