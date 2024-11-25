@@ -10,7 +10,7 @@ export class TwoSumLogService {
     private readonly twoSumLogRepository: Repository<TwoSumLog>,
   ) {}
 
-  // Método para crear un log
+  // Method to create a log
   async createLog(
     array: number[],
     numberOne: number,
@@ -24,7 +24,7 @@ export class TwoSumLogService {
     await this.twoSumLogRepository.save(log);
   }
 
-  // Método para obtener todos los logs
+  // Method to get all logs
   async getAllLogs(): Promise<TwoSumLog[]> {
     return this.twoSumLogRepository.find();
   }

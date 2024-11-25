@@ -1,11 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity('twoSumLogs') // Nombre de la tabla en la base de datos
+@Entity('twoSumLogs') // Name of the table in the database
 export class TwoSumLog {
-  @PrimaryGeneratedColumn() // ID que será autoincrementado
+  @PrimaryGeneratedColumn() // ID to be auto-incremented
   id: number;
 
-  @Column('json') // Usamos el tipo JSON para el array
+  @Column('json') // We use the JSON type for the array
   array: number[];
 
   @Column()

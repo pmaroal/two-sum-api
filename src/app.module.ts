@@ -10,16 +10,16 @@ import { TwoSumLogService } from './twoSumLog.service';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'youruser', // Cambia según tu configuración
+      username: 'youruser',
       password: 'yourpassword',
       database: 'yourdatabase',
 
       autoLoadEntities: true,
-      synchronize: true, // Solo en desarrollo
+      synchronize: true, // In development only
     }),
-    TypeOrmModule.forFeature([TwoSumLog]), // Importamos la entidad aquí
+    TypeOrmModule.forFeature([TwoSumLog]), // We import the entity here
   ],
   controllers: [AppController],
-  providers: [TwoSumLogService], // Agregar el servicio aquí
+  providers: [TwoSumLogService], // Add the service here
 })
 export class AppModule {}
