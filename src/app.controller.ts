@@ -15,8 +15,7 @@ export class AppController {
   getHealth(): string {
     return 'ok';
   }
-
-  // Endpoint /twoSum que recibe un array y un target como parámetros
+  // Endpoint /twoSum which receives an array and a target as parameters
 
   @Get('twoSum')
   async getTwoSum(
@@ -46,7 +45,7 @@ export class AppController {
     //If no numbers are found, return 404
     throw new HttpException('Two numbers not found', HttpStatus.NOT_FOUND);
   }
-  // Endpoint /history para obtener todos los logs
+  // Endpoint /history to obtain all logs
   @Get('history')
   async getHistory() {
     return await this.twoSumLogService.getAllLogs();
