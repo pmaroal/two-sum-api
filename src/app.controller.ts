@@ -6,6 +6,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { TwoSumLogService } from './twoSumLog.service';
+import { twoSum } from './twoSum.util';
 
 @Controller()
 export class AppController {
@@ -27,20 +28,16 @@ export class AppController {
     const numbersArray = JSON.parse(array);
     const targetNumber = parseInt(target);
 
-    //Logic for finding two numbers that add up to the target value
-    for (let i = 0; i < numbersArray.length; i++) {
-      for (let j = i + 1; j < numbersArray.length; j++) {
-        if (numbersArray[i] + numbersArray[j] === targetNumber) {
-          // Aquí registramos el log
-          await this.twoSumLogService.createLog(
-            numbersArray,
-            numbersArray[i],
-            numbersArray[j],
-          );
+    const result = twoSum(numbersArray, targetNumber);
 
-          return { numberOne: numbersArray[i], numberTwo: numbersArray[j] };
-        }
-      }
+    //Logic for finding two numbers that add up to the target value
+    if (result) {
+      const [numberOne, numberTwo] = result;
+
+      // Registra el log
+      await this.twoSumLogService.createLog(numbersArray, numberOne, numberTwo);
+
+      return { numberOne, numberTwo };
     }
     //If no numbers are found, return 404
     throw new HttpException('Two numbers not found', HttpStatus.NOT_FOUND);
