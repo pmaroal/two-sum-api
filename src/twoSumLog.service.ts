@@ -7,24 +7,27 @@ import { TwoSumLog } from './entities/twoSumLog.entity';
 export class TwoSumLogService {
   constructor(
     @InjectRepository(TwoSumLog)
-    private readonly twoSumLogRepository: Repository<TwoSumLog>,
+    private twoSumLogRepository: Repository<TwoSumLog>,
   ) {}
 
-  // Method to create a log
+  // Método para crear un log
   async createLog(
     array: number[],
     numberOne: number,
     numberTwo: number,
-  ): Promise<void> {
-    const log = new TwoSumLog();
-    log.array = array;
-    log.numberOne = numberOne;
-    log.numberTwo = numberTwo;
+  ): Promise<TwoSumLog> {
+    // Aquí se crea el objeto TwoSumLog, pero aún no se guarda en la base de datos
+    const log = this.twoSumLogRepository.create({
+      array,
+      numberOne,
+      numberTwo,
+    });
 
-    await this.twoSumLogRepository.save(log);
+    // Ahora se guarda en la base de datos
+    return await this.twoSumLogRepository.save(log);
   }
 
-  // Method to get all logs
+  // Método para obtener todos los logs
   async getAllLogs(): Promise<TwoSumLog[]> {
     return this.twoSumLogRepository.find();
   }
