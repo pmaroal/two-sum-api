@@ -6,46 +6,42 @@ import {
   Query,
 } from '@nestjs/common';
 import { TwoSumLogService } from './twoSumLog.service';
+import { twoSum } from './twoSum.util'; // Importamos la función
 
 @Controller()
 export class AppController {
   constructor(private readonly twoSumLogService: TwoSumLogService) {}
-  // Endpoint /health always responding OK with status 200
+
   @Get('health')
   getHealth(): string {
     return 'ok';
   }
-  // Endpoint /twoSum which receives an array and a target as parameters
 
   @Get('twoSum')
   async getTwoSum(
     @Query('array') array: string,
     @Query('target') target: string,
   ) {
-    // Endpoint /twoSum receiving an array and a target as parameters
-
     const numbersArray = JSON.parse(array);
     const targetNumber = parseInt(target);
 
-    //Logic for finding two numbers that add up to the target value
-    for (let i = 0; i < numbersArray.length; i++) {
-      for (let j = i + 1; j < numbersArray.length; j++) {
-        if (numbersArray[i] + numbersArray[j] === targetNumber) {
-          // Aquí registramos el log
-          await this.twoSumLogService.createLog(
-            numbersArray,
-            numbersArray[i],
-            numbersArray[j],
-          );
+    // Llamamos a la nueva función twoSum para obtener los números
+    const result = twoSum(numbersArray, targetNumber);
 
-          return { numberOne: numbersArray[i], numberTwo: numbersArray[j] };
-        }
-      }
+    if (result) {
+      // Si encontramos un par, lo registramos
+      await this.twoSumLogService.createLog(
+        numbersArray,
+        result.numberOne,
+        result.numberTwo,
+      );
+      return result; // Retornamos el par encontrado
     }
-    //If no numbers are found, return 404
+
+    // Si no encontramos el par, lanzamos una excepción
     throw new HttpException('Two numbers not found', HttpStatus.NOT_FOUND);
   }
-  // Endpoint /history to obtain all logs
+
   @Get('history')
   async getHistory() {
     return await this.twoSumLogService.getAllLogs();
