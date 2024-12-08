@@ -9,5 +9,6 @@ export function twoSum(
       }
     }
   }
-  return null;
+  return null; // En caso de no encontrar un par
+  //    throw new HttpException('Two numbers not found', HttpStatus.NOT_FOUND);
 }
