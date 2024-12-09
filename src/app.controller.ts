@@ -32,6 +32,7 @@ export class AppController {
       // Si encontramos un par, lo registramos
       await this.twoSumLogService.createLog(
         numbersArray,
+        targetNumber,
         result.numberOne,
         result.numberTwo,
       );

@@ -9,6 +9,9 @@ export class TwoSumLog {
   array: number[];
 
   @Column()
+  target: number;
+
+  @Column()
   numberOne: number;
 
   @Column()

@@ -13,11 +13,13 @@ export class TwoSumLogService {
   // Method to create a log
   async createLog(
     array: number[],
+    target: number,
     numberOne: number,
     numberTwo: number,
   ): Promise<void> {
     const log = new TwoSumLog();
     log.array = array;
+    log.target = target;
     log.numberOne = numberOne;
     log.numberTwo = numberTwo;
 
