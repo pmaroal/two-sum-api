@@ -51,4 +51,16 @@ describe('twoSum function', () => {
     const result = twoSum(array, target);
     expect(result).toEqual({ numberOne: 2, numberTwo: 2 });
   });
+  it('should handle decimal numbers correctly', () => {
+    const array = [1.1, 2.2, 3.3, 4.4];
+    const target = 3.3;
+    const result = twoSum(array, target);
+    expect(result).toEqual({ numberOne: 1.1, numberTwo: 2.2 });
+  });
+  it('should handle arrays with negative numbers correctly', () => {
+    const array = [-1, -2, -3, -4];
+    const target = -4;
+    const result = twoSum(array, target);
+    expect(result).toEqual({ numberOne: -1, numberTwo: -3 });
+  });
 });
